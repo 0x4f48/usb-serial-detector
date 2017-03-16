@@ -68,7 +68,8 @@ namespace SerialPortDetector
         public void UpdateList(bool bShowWindow)
         {
             this.bShowWindow = bShowWindow;
-            this.bgwUpdater.RunWorkerAsync();
+            if (!this.bgwUpdater.IsBusy)
+                this.bgwUpdater.RunWorkerAsync();
         }
 
     }
