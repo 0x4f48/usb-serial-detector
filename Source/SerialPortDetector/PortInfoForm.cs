@@ -59,7 +59,13 @@ namespace SerialPortDetector
             {
                 // show up window
                 if (this.Visible == true)
-                    this.Focus();
+                {
+
+                    if (this.WindowState == System.Windows.Forms.FormWindowState.Minimized)
+                        this.WindowState = System.Windows.Forms.FormWindowState.Normal;
+                    else
+                        this.Focus();
+                }
                 else
                     this.ShowDialog();
             }

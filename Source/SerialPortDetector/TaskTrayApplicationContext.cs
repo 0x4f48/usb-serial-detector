@@ -35,7 +35,10 @@ namespace SerialPortDetector
         {
             // If we are already showing the window meerly focus it.
             if (portInfoWindow.Visible)
+            {
+                portInfoWindow.WindowState = System.Windows.Forms.FormWindowState.Normal;
                 portInfoWindow.Focus();
+            }
             else
                 portInfoWindow.ShowDialog();
         }

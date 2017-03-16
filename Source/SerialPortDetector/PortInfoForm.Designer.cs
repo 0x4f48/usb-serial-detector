@@ -58,7 +58,9 @@
             this.Controls.Add(this.lbPortList);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "PortInfoForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Serial Port Info";
             this.Load += new System.EventHandler(this.FormLoaded);
             this.ResumeLayout(false);
