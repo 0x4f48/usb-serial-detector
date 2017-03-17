@@ -11,6 +11,7 @@ namespace SerialPortDetector
     class MessageWindow : Form
     {
         private PortInfoForm portInfoWindowObj;
+        private const int DBT_DEVTYP_PORT = 0x00000003;      // serial, parallel
 
         [DllImport("user32.dll")]
         static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
@@ -42,17 +43,26 @@ namespace SerialPortDetector
         }
 
         protected override void WndProc(ref Message m)
-        {            
+        {
+            int devType;
             base.WndProc(ref m);
             if (m.Msg == UsbNotification.WmDevicechange)
             {
                 switch ((int)m.WParam)
                 {
                     case UsbNotification.DbtDeviceremovecomplete:
-                        portInfoWindowObj.UpdateList(false);
+                        devType = Marshal.ReadInt32(m.LParam, 4);
+                        if (devType == DBT_DEVTYP_PORT)
+                        {
+                            portInfoWindowObj.UpdateList(false);
+                        }
                         break;
                     case UsbNotification.DbtDevicearrival:
-                        portInfoWindowObj.UpdateList(true);
+                        devType = Marshal.ReadInt32(m.LParam, 4);
+                        if (devType == DBT_DEVTYP_PORT)
+                        {
+                            portInfoWindowObj.UpdateList(true);
+                        }
                         break;
                 }
             }

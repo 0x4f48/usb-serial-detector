@@ -48,7 +48,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MessageWindow.cs" />
+    <Compile Include="MessageWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="PortInfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
